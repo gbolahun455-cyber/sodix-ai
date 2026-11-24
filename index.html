@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SODIX AI - AI Website Builder</title>
+<meta name="description" content="Turn your ideas into beautiful websites with SODIX AI.">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+font-family:Arial,sans-serif;
+background:#080912;
+color:#fff;
+min-height:100vh;
+}
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 6%;
+border-bottom:1px solid #202135;
+}
+.logo{font-size:25px;font-weight:900;letter-spacing:-1px}
+.logo span{color:#9270ff}
+nav{display:flex;gap:25px}
+nav a{color:#aaa;text-decoration:none;font-size:14px}
+nav a:hover{color:#fff}
+.login{
+background:#8b5cf6;color:white;
+padding:11px 20px;border-radius:9px;
+text-decoration:none;font-size:13px;
+}
+.hero{
+max-width:1000px;
+margin:85px auto 45px;
+padding:0 20px;
+text-align:center;
+}
+.badge{
+display:inline-block;
+border:1px solid #45316f;
+background:#171027;
+color:#c2aaff;
+padding:9px 17px;
+border-radius:30px;
+font-size:12px;
+margin-bottom:25px;
+}
+h1{
+font-size:clamp(38px,7vw,68px);
+line-height:1.12;
+letter-spacing:-2px;
+}
+.gradient{
+background:linear-gradient(90deg,#a78bfa,#60a5fa);
+-webkit-background-clip:text;
+color:transparent;
+}
+.hero p{
+color:#9999ad;
+font-size:16px;
+line-height:1.7;
+max-width:600px;
+margin:20px auto 35px;
+}
+.builder{
+max-width:750px;
+margin:auto;
+background:#111321;
+border:1px solid #30334b;
+padding:18px;
+border-radius:18px;
+box-shadow:0 20px 80px #6b35ff17;
+}
+textarea{
+width:100%;
+height:110px;
+resize:none;
+background:transparent;
+border:0;
+outline:0;
+color:white;
+font-size:16px;
+font-family:inherit;
+}
+textarea::placeholder{color:#717489}
+.builder-bottom{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+border-top:1px solid #292b40;
+padding-top:15px;
+}
+.builder-bottom span{color:#777b91;font-size:12px}
+button{
+background:linear-gradient(100deg,#8055ef,#4778ef);
+border:0;
+color:white;
+padding:13px 20px;
+border-radius:9px;
+font-weight:bold;
+cursor:pointer;
+}
+button:hover{opacity:.85}
+.templates{
+max-width:1000px;
+margin:80px auto;
+padding:0 20px;
+}
+.section-title{text-align:center;font-size:26px}
+.section-sub{
+text-align:center;color:#85869a;
+margin:12px 0 30px;font-size:14px
+}
+.grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:18px;
+}
+.card{
+background:#111321;
+border:1px solid #282b40;
+border-radius:14px;
+padding:25px;
+cursor:pointer;
+transition:.3s;
+}
+.card:hover{
+transform:translateY(-5px);
+border-color:#8762ef;
+}
+.icon{font-size:30px;margin-bottom:17px}
+.card h3{font-size:17px;margin-bottom:9px}
+.card p{color:#898b9e;font-size:13px;line-height:1.6}
+.preview{
+max-width:750px;
+margin:60px auto;
+padding:20px;
+}
+.preview-box{
+background:#111321;
+border:1px solid #30334b;
+border-radius:15px;
+padding:25px;
+min-height:150px;
+color:#aaa;
+text-align:center;
+}
+.preview-box h3{color:white;margin-bottom:12px}
+#result{margin-top:20px;line-height:1.7;overflow-wrap:anywhere}
+footer{
+border-top:1px solid #25273a;
+padding:30px;
+text-align:center;
+color:#77798b;
+font-size:13px;
+}
+@media(max-width:700px){
+nav{display:none}
+.grid{grid-template-columns:1fr}
+.hero{margin-top:65px}
+.builder{padding:14px}
+h1{letter-spacing:-1px}
+}
+</style>
+</head>
+<body>
+
+<header>
+<div class="logo">SODIX<span> AI</span></div>
+<nav>
+<a href="#">Home</a>
+<a href="#builder">Builder</a>
+<a href="#templates">Templates</a>
+</nav>
+<a class="login" href="#builder">Get Started</a>
+</header>
+
+<section class="hero">
+<div class="badge">✦ THE FUTURE OF WEBSITE CREATION</div>
+<h1>Turn your ideas into<br><span class="gradient">beautiful websites.</span></h1>
+<p>Describe your dream website. Let SODIX AI help you bring your imagination to life. No coding experience required.</p>
+
+<div class="builder" id="builder">
+<textarea id="prompt" placeholder="Describe the website you want to create...
+
+Example: Build a modern website for my fashion business with a homepage, product gallery and WhatsApp contact button."></textarea>
+<div class="builder-bottom">
+<span>✦ Powered by SODIX AI</span>
+<button onclick="generate()">✦ Generate Website</button>
+</div>
+</div>
+</section>
+
+<section class="templates" id="templates">
+<h2 class="section-title">What do you want to build?</h2>
+<p class="section-sub">Start with an idea and make it yours.</p>
+<div class="grid">
+<div class="card" onclick="useTemplate('A professional business website with services, about and contact pages')">
+<div class="icon">🏢</div>
+<h3>Business Website</h3>
+<p>Professional websites for businesses and companies.</p>
+</div>
+<div class="card" onclick="useTemplate('A beautiful personal portfolio website with projects and contact details')">
+<div class="icon">🎨</div>
+<h3>Portfolio</h3>
+<p>Showcase your creativity, skills and projects.</p>
+</div>
+<div class="card" onclick="useTemplate('An online fashion store with product gallery and shopping cart')">
+<div class="icon">🛍️</div>
+<h3>Online Store</h3>
+<p>Display products and build your online shop.</p>
+</div>
+<div class="card" onclick="useTemplate('A modern school website with announcements and student information')">
+<div class="icon">🎓</div>
+<h3>School Website</h3>
+<p>Websites for schools and educational institutions.</p>
+</div>
+<div class="card" onclick="useTemplate('A modern technology company website with services and contact information')">
+<div class="icon">💻</div>
+<h3>Technology</h3>
+<p>Showcase your technology business.</p>
+</div>
+<div class="card" onclick="useTemplate('A beautiful restaurant website with menu and reservations information')">
+<div class="icon">🍽️</div>
+<h3>Restaurant</h3>
+<p>Present your restaurant and menu online.</p>
+</div>
+</div>
+</section>
+
+<section class="preview">
+<div class="preview-box">
+<h3>✦ Your AI Workspace</h3>
+<p id="status">Your generated website will appear here.</p>
+<div id="result"></div>
+</div>
+</section>
+
+<footer>
+<p>© 2026 SODIX AI. All rights reserved.</p>
+<p style="margin-top:10px">Created by Ogunlowo Sodiq</p>
+</footer>
+
+<script>
+function useTemplate(text){
+document.getElementById('prompt').value=text;
+document.getElementById('builder').scrollIntoView({behavior:'smooth'});
+}
+
+function generate(){
+const prompt=document.getElementById('prompt').value.trim();
+const status=document.getElementById('status');
+const result=document.getElementById('result');
+
+if(!prompt){
+alert('Please describe the website you want to create.');
+return;
+}
+
+status.innerHTML='Your idea is ready for AI generation.';
+result.innerHTML='<p style="color:#b9a2ff">✦ Website request received!</p><p style="margin-top:10px">Your website description:</p><p style="color:white;margin-top:8px"></p>';
+result.lastElementChild.textContent=prompt;
+
+document.getElementById('result').scrollIntoView({behavior:'smooth',block:'center'});
+}
+</script>
+
+</body>
+</html>
