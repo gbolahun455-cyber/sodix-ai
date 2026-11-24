@@ -7,282 +7,117 @@
 
 <style>
 :root {
-  --bg: #080b16;
-  --panel: #111729;
-  --panel2: #171f35;
-  --purple: #8b5cf6;
-  --blue: #2563eb;
-  --text: #f8fafc;
-  --muted: #94a3b8;
-  --border: #27334c;
+  --bg:#080b16;
+  --panel:#111729;
+  --panel2:#171f35;
+  --purple:#8b5cf6;
+  --blue:#2563eb;
+  --text:#f8fafc;
+  --muted:#94a3b8;
+  --border:#27334c;
+  --green:#10b981;
 }
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
+header{
+  padding:18px 6%;display:flex;justify-content:space-between;
+  align-items:center;border-bottom:1px solid var(--border);
+  background:#0b1020;gap:12px
 }
-
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: Arial, sans-serif;
+.logo{font-size:24px;font-weight:900;letter-spacing:1px}
+.logo span,footer span{color:#a78bfa}
+.tagline{color:var(--muted);font-size:12px;margin-top:5px}
+.badge{background:#1d1740;color:#c4b5fd;padding:8px 12px;border-radius:20px;font-size:12px}
+.hero{text-align:center;padding:55px 15px 30px}
+.hero h1{font-size:clamp(30px,6vw,55px);line-height:1.15}
+.hero h1 span{
+  background:linear-gradient(90deg,#a78bfa,#38bdf8);
+  -webkit-background-clip:text;color:transparent
 }
-
-header {
-  padding: 18px 6%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid var(--border);
-  background: #0b1020;
+.hero p{color:var(--muted);margin-top:15px}
+.container{width:92%;max-width:1250px;margin:auto}
+.panel{
+  background:var(--panel);border:1px solid var(--border);
+  padding:22px;border-radius:17px;margin-bottom:22px
 }
-
-.logo {
-  font-size: 24px;
-  font-weight: 900;
-  letter-spacing: 1px;
+.panel h2{font-size:19px;margin-bottom:15px}
+label{display:block;color:var(--muted);font-size:13px;margin-bottom:9px}
+textarea,select{
+  width:100%;padding:15px;border-radius:11px;
+  background:#080e1e;border:1px solid var(--border);
+  color:white;outline:none;font-family:inherit;font-size:14px
 }
-
-.logo span {
-  color: #a78bfa;
+textarea{min-height:125px;resize:vertical}
+textarea:focus,select:focus{border-color:var(--purple)}
+select{margin-top:10px;cursor:pointer}
+button{
+  border:none;padding:13px 19px;border-radius:10px;
+  font-weight:bold;cursor:pointer;color:white;transition:.2s
 }
-
-.tagline {
-  color: var(--muted);
-  font-size: 12px;
-  margin-top: 5px;
+button:hover{opacity:.88;transform:translateY(-1px)}
+button:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.primary{
+  background:linear-gradient(100deg,var(--purple),var(--blue));
+  width:100%;margin-top:15px
 }
-
-.badge {
-  background: #1d1740;
-  color: #c4b5fd;
-  padding: 8px 12px;
-  border-radius: 20px;
-  font-size: 12px;
+.secondary{background:#27334c}
+.edit-button{
+  background:linear-gradient(100deg,#0ea5e9,#6366f1);
+  width:100%;margin-top:15px
 }
-
-.hero {
-  text-align: center;
-  padding: 55px 15px 30px;
+.publish-button{
+  background:linear-gradient(100deg,#059669,#10b981);
+  width:100%;margin-top:12px
 }
-
-.hero h1 {
-  font-size: clamp(30px, 6vw, 55px);
-  line-height: 1.15;
+.republish-button{
+  background:linear-gradient(100deg,#7c3aed,#4f46e5);
+  width:100%;margin-top:12px
 }
-
-.hero h1 span {
-  background: linear-gradient(90deg, #a78bfa, #38bdf8);
-  -webkit-background-clip: text;
-  color: transparent;
+.status{
+  margin-top:14px;color:#a78bfa;font-size:13px;
+  min-height:18px;overflow-wrap:anywhere
 }
-
-.hero p {
-  color: var(--muted);
-  margin-top: 15px;
+.live-card{
+  display:none;margin-top:18px;padding:16px;
+  background:#0b1d1b;border:1px solid #166534;
+  border-radius:12px;overflow-wrap:anywhere
 }
-
-.container {
-  width: 92%;
-  max-width: 1250px;
-  margin: auto;
+.live-card strong{color:#6ee7b7;display:block;margin-bottom:9px}
+.live-link{color:#67e8f9;word-break:break-all;font-size:13px}
+.live-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}
+.live-actions button{font-size:12px}
+.preview-header{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:12px;flex-wrap:wrap;margin-bottom:15px
 }
-
-.panel {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  padding: 22px;
-  border-radius: 17px;
-  margin-bottom: 22px;
+.preview-actions{display:flex;gap:8px;flex-wrap:wrap}
+.preview-actions button{font-size:12px;padding:10px 13px}
+.preview-box{background:white;border-radius:12px;overflow:hidden;min-height:400px}
+iframe{width:100%;height:650px;display:block;border:none;background:white}
+iframe.mobile{
+  width:390px;max-width:100%;margin:auto;
+  border-left:5px solid #222;border-right:5px solid #222;border-radius:12px
 }
-
-.panel h2 {
-  font-size: 19px;
-  margin-bottom: 15px;
+.templates{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px
 }
-
-label {
-  display: block;
-  color: var(--muted);
-  font-size: 13px;
-  margin-bottom: 9px;
+.template{
+  background:var(--panel2);border:1px solid var(--border);
+  padding:17px;border-radius:12px;text-align:center;
+  cursor:pointer;transition:.2s
 }
-
-textarea, select {
-  width: 100%;
-  padding: 15px;
-  border-radius: 11px;
-  background: #080e1e;
-  border: 1px solid var(--border);
-  color: white;
-  outline: none;
-  font-family: inherit;
-  font-size: 14px;
+.template:hover{border-color:var(--purple);transform:translateY(-3px)}
+.template strong{display:block;margin-bottom:6px}
+.template small{color:var(--muted)}
+footer{
+  text-align:center;padding:30px 15px;color:var(--muted);
+  font-size:12px;border-top:1px solid var(--border);margin-top:35px
 }
-
-textarea {
-  min-height: 125px;
-  resize: vertical;
-}
-
-textarea:focus, select:focus {
-  border-color: var(--purple);
-}
-
-select {
-  margin-top: 10px;
-  cursor: pointer;
-}
-
-button {
-  border: none;
-  padding: 13px 19px;
-  border-radius: 10px;
-  font-weight: bold;
-  cursor: pointer;
-  color: white;
-  transition: .2s;
-}
-
-button:hover {
-  opacity: .88;
-  transform: translateY(-1px);
-}
-
-button:disabled {
-  opacity: .5;
-  cursor: not-allowed;
-  transform: none;
-}
-
-.primary {
-  background: linear-gradient(100deg, var(--purple), var(--blue));
-  width: 100%;
-  margin-top: 15px;
-}
-
-.secondary {
-  background: #27334c;
-}
-
-.edit-button {
-  background: linear-gradient(100deg, #0ea5e9, #6366f1);
-  width: 100%;
-  margin-top: 15px;
-}
-
-.status {
-  margin-top: 14px;
-  color: #a78bfa;
-  font-size: 13px;
-  min-height: 18px;
-  overflow-wrap: anywhere;
-}
-
-.preview-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-bottom: 15px;
-}
-
-.preview-actions {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.preview-actions button {
-  font-size: 12px;
-  padding: 10px 13px;
-}
-
-.preview-box {
-  background: white;
-  border-radius: 12px;
-  overflow: hidden;
-  min-height: 400px;
-}
-
-iframe {
-  width: 100%;
-  height: 650px;
-  display: block;
-  border: none;
-  background: white;
-}
-
-iframe.mobile {
-  width: 390px;
-  max-width: 100%;
-  margin: auto;
-  border-left: 5px solid #222;
-  border-right: 5px solid #222;
-  border-radius: 12px;
-}
-
-.templates {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 12px;
-}
-
-.template {
-  background: var(--panel2);
-  border: 1px solid var(--border);
-  padding: 17px;
-  border-radius: 12px;
-  text-align: center;
-  cursor: pointer;
-  transition: .2s;
-}
-
-.template:hover {
-  border-color: var(--purple);
-  transform: translateY(-3px);
-}
-
-.template strong {
-  display: block;
-  margin-bottom: 6px;
-}
-
-.template small {
-  color: var(--muted);
-}
-
-footer {
-  text-align: center;
-  padding: 30px 15px;
-  color: var(--muted);
-  font-size: 12px;
-  border-top: 1px solid var(--border);
-  margin-top: 35px;
-}
-
-footer span {
-  color: #a78bfa;
-}
-
-@media(max-width:600px) {
-  header {
-    padding: 15px 4%;
-  }
-
-  .badge {
-    font-size: 10px;
-  }
-
-  .panel {
-    padding: 16px;
-  }
-
-  iframe {
-    height: 520px;
-  }
+@media(max-width:600px){
+  header{padding:15px 4%}
+  .badge{font-size:10px}
+  .panel{padding:16px}
+  iframe{height:520px}
 }
 </style>
 </head>
@@ -294,7 +129,6 @@ footer span {
     <div class="logo">SODIX<span> AI</span></div>
     <div class="tagline">Imagine It. Describe It. Build It.</div>
   </div>
-
   <div class="badge">AI WEBSITE BUILDER</div>
 </header>
 
@@ -305,18 +139,12 @@ footer span {
 
 <main class="container">
 
-  <!-- GENERATOR -->
-
   <section class="panel">
     <h2>✨ Create a Website</h2>
-
     <label for="prompt">Describe the website you want to build</label>
-
-    <textarea id="prompt"
-      placeholder="Example: Build a professional website for a technology company with a beautiful homepage, services, about section and contact form."></textarea>
+    <textarea id="prompt" placeholder="Example: Build a professional website for a technology company with a beautiful homepage, services, about section and contact form."></textarea>
 
     <label for="provider" style="margin-top:15px">AI Provider</label>
-
     <select id="provider">
       <option value="gemini">Google Gemini</option>
       <option value="openai">OpenAI</option>
@@ -325,86 +153,82 @@ footer span {
     <button class="primary" id="generateBtn" onclick="generateWebsite()">
       ✨ Generate My Website
     </button>
-
     <div class="status" id="status"></div>
   </section>
 
-  <!-- TEMPLATES -->
-
   <section class="panel">
     <h2>🚀 Try an Idea</h2>
-
     <div class="templates">
-
       <div class="template" onclick="useTemplate('Build a modern professional business website with homepage, about, services, testimonials and contact section.')">
-        <strong>🏢 Business</strong>
-        <small>Company website</small>
+        <strong>🏢 Business</strong><small>Company website</small>
       </div>
-
       <div class="template" onclick="useTemplate('Build a beautiful modern online shopping website with product cards, categories, shopping cart interface and checkout demonstration.')">
-        <strong>🛍️ Store</strong>
-        <small>Online shop</small>
+        <strong>🛍️ Store</strong><small>Online shop</small>
       </div>
-
       <div class="template" onclick="useTemplate('Build a modern school website with admission information, courses, school activities, about section and contact information.')">
-        <strong>🎓 School</strong>
-        <small>Education website</small>
+        <strong>🎓 School</strong><small>Education website</small>
       </div>
-
       <div class="template" onclick="useTemplate('Build a professional personal portfolio website for a young technology developer with projects, skills, about me and contact sections.')">
-        <strong>💻 Portfolio</strong>
-        <small>Personal website</small>
+        <strong>💻 Portfolio</strong><small>Personal website</small>
       </div>
-
       <div class="template" onclick="useTemplate('Build a modern restaurant website with food menu, restaurant information, opening hours and reservation interface.')">
-        <strong>🍽️ Restaurant</strong>
-        <small>Food website</small>
+        <strong>🍽️ Restaurant</strong><small>Food website</small>
       </div>
-
       <div class="template" onclick="useTemplate('Build a modern technology startup website with a futuristic design, features, services, about section and contact section.')">
-        <strong>🤖 Technology</strong>
-        <small>Tech website</small>
+        <strong>🤖 Technology</strong><small>Tech website</small>
       </div>
-
     </div>
   </section>
 
-  <!-- AI EDITOR -->
-
   <section class="panel">
     <h2>🪄 AI Website Editor</h2>
-
     <p style="color:var(--muted);font-size:13px;margin-bottom:15px">
       Already generated a website? Tell SODIX AI what you want to change.
     </p>
-
     <label for="editInstruction">What should SODIX AI change?</label>
-
-    <textarea id="editInstruction"
-      placeholder="Example: Change the background to black, make the heading larger and add a contact section."></textarea>
-
+    <textarea id="editInstruction" placeholder="Example: Change the background to black, make the heading larger and add a contact section."></textarea>
     <button class="edit-button" id="editBtn" onclick="editWebsite()">
       🪄 Edit My Website
     </button>
-
     <div class="status" id="editStatus"></div>
   </section>
 
-  <!-- PREVIEW -->
+  <!-- PUBLISH WEBSITE -->
+
+  <section class="panel">
+    <h2>🚀 Publish Your Website</h2>
+    <p style="color:var(--muted);font-size:13px;line-height:1.6">
+      Publish your generated website and receive a live link that you can share with anyone.
+    </p>
+
+    <button class="publish-button" id="publishBtn" onclick="publishWebsite()">
+      🌍 Publish Website
+    </button>
+
+    <button class="republish-button" id="republishBtn" onclick="republishWebsite()" disabled>
+      🔄 Republish / Update Website
+    </button>
+
+    <div class="status" id="publishStatus">
+      Generate a website first to publish it.
+    </div>
+
+    <div class="live-card" id="liveCard">
+      <strong>🎉 Your website is live!</strong>
+      <div class="live-link" id="liveLink"></div>
+      <div class="live-actions">
+        <button class="secondary" onclick="copyLiveLink()">📋 Copy Link</button>
+        <button class="secondary" onclick="openLiveLink()">🌐 Visit Website</button>
+      </div>
+    </div>
+  </section>
 
   <section class="panel">
     <div class="preview-header">
       <h2>🌐 Website Preview</h2>
-
       <div class="preview-actions">
-        <button class="secondary" onclick="setPreview('desktop')">
-          Desktop
-        </button>
-
-        <button class="secondary" onclick="setPreview('mobile')">
-          Mobile
-        </button>
-
+        <button class="secondary" onclick="setPreview('desktop')">Desktop</button>
+        <button class="secondary" onclick="setPreview('mobile')">Mobile</button>
         <button class="secondary" id="downloadBtn" onclick="downloadWebsite()" disabled>
           ⬇ Download
         </button>
@@ -412,16 +236,10 @@ footer span {
     </div>
 
     <div class="preview-box">
-      <iframe
-        id="previewFrame"
-        title="Generated website preview"
-        sandbox="allow-scripts">
-      </iframe>
+      <iframe id="previewFrame" title="Generated website preview" sandbox="allow-scripts"></iframe>
     </div>
 
-    <p class="status" id="previewStatus">
-      Your generated website will appear here.
-    </p>
+    <p class="status" id="previewStatus">Your generated website will appear here.</p>
   </section>
 
 </main>
@@ -432,49 +250,58 @@ footer span {
 </footer>
 
 <script>
-
-// ====================================
-// SODIX AI CONFIGURATION
-// ====================================
-
-const SUPABASE_URL =
-  "https://hmjjbdigpguhxtoxtzyz.supabase.co";
-
-const SUPABASE_KEY =
-  "sb_publishable_QJL0y2H6COGc3PyMWdFwpA_M_e7aLV6";
+const SUPABASE_URL = "https://hmjjbdigpguhxtoxtzyz.supabase.co";
+const SUPABASE_KEY = "sb_publishable_QJL0y2H6COGc3PyMWdFwpA_M_e7aLV6";
 
 let generatedHTML = "";
 
+const STORAGE_KEY = "sodix_published_project";
 
-// ====================================
-// TEMPLATE SELECTION
-// ====================================
+let publishedProject = null;
+
+try {
+  publishedProject = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+} catch (e) {
+  publishedProject = null;
+}
 
 function useTemplate(text) {
   document.getElementById("prompt").value = text;
-
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
+  window.scrollTo({top:0,behavior:"smooth"});
 }
 
+function apiHeaders() {
+  return {
+    "Content-Type":"application/json",
+    "apikey":SUPABASE_KEY,
+    "Authorization":"Bearer " + SUPABASE_KEY
+  };
+}
 
-// ====================================
+async function readResponse(response) {
+  const text = await response.text();
+  let data;
+
+  try {
+    data = JSON.parse(text);
+  } catch {
+    throw new Error("The server returned an invalid response.");
+  }
+
+  if (!response.ok || data.success === false) {
+    throw new Error(data.error || data.message || "The request failed.");
+  }
+
+  return data;
+}
+
 // GENERATE WEBSITE
-// ====================================
 
 async function generateWebsite() {
-
   const prompt = document.getElementById("prompt").value.trim();
-
   const provider = document.getElementById("provider").value;
-
   const button = document.getElementById("generateBtn");
-
   const status = document.getElementById("status");
-
-  const previewStatus = document.getElementById("previewStatus");
 
   if (!prompt) {
     status.textContent = "Please describe the website you want.";
@@ -482,85 +309,54 @@ async function generateWebsite() {
   }
 
   button.disabled = true;
-
   button.textContent = "Generating Website...";
-
   status.textContent = "SODIX AI is building your website. Please wait.";
 
   try {
-
     const response = await fetch(
       SUPABASE_URL + "/functions/v1/sodix-generator",
       {
-        method: "POST",
-
-        headers: {
-          "Content-Type": "application/json",
-          "apikey": SUPABASE_KEY,
-          "Authorization": "Bearer " + SUPABASE_KEY
-        },
-
-        body: JSON.stringify({
-          prompt: prompt,
-          provider: provider
-        })
+        method:"POST",
+        headers:apiHeaders(),
+        body:JSON.stringify({prompt,provider})
       }
     );
 
-    const data = await response.json();
+    const data = await readResponse(response);
 
-    if (!response.ok || !data.success || !data.html) {
-      throw new Error(
-        data.error || data.message || "Website generation failed."
-      );
-    }
+    if (!data.html) throw new Error("No website HTML was returned.");
 
     generatedHTML = data.html;
 
     document.getElementById("previewFrame").srcdoc = generatedHTML;
-
     document.getElementById("downloadBtn").disabled = false;
 
     status.textContent = "🎉 Website generated successfully!";
-
-    previewStatus.textContent = "Your website is ready to preview.";
-
-    document.getElementById("editStatus").textContent =
-      "You can now use AI Edit to modify this website.";
-
+    document.getElementById("previewStatus").textContent = "Your website is ready to preview.";
+    document.getElementById("editStatus").textContent = "You can now use AI Edit to modify this website.";
     document.getElementById("editInstruction").value = "";
 
+    document.getElementById("publishStatus").textContent =
+      "Your website is ready. You can now publish it.";
+
     document.getElementById("previewFrame").scrollIntoView({
-      behavior: "smooth",
-      block: "center"
+      behavior:"smooth",
+      block:"center"
     });
 
-  } catch (error) {
-
+  } catch(error) {
     status.textContent = "Error: " + error.message;
-
   } finally {
-
     button.disabled = false;
-
     button.textContent = "✨ Generate My Website";
-
   }
-
 }
 
-
-// ====================================
 // AI WEBSITE EDITOR
-// ====================================
 
 async function editWebsite() {
-
-  const instruction =
-    document.getElementById("editInstruction").value.trim();
-
+  const instruction = document.getElementById("editInstruction").value.trim();
   const button = document.getElementById("editBtn");
-
   const status = document.getElementById("editStatus");
 
   if (!generatedHTML) {
@@ -574,122 +370,229 @@ async function editWebsite() {
   }
 
   button.disabled = true;
-
   button.textContent = "Editing Website...";
-
   status.textContent = "SODIX AI is improving your website...";
 
   try {
-
     const response = await fetch(
       SUPABASE_URL + "/functions/v1/sodix-editor",
       {
-        method: "POST",
-
-        headers: {
-          "Content-Type": "application/json",
-          "apikey": SUPABASE_KEY,
-          "Authorization": "Bearer " + SUPABASE_KEY
-        },
-
-        body: JSON.stringify({
-          html: generatedHTML,
-          instruction: instruction
-        })
+        method:"POST",
+        headers:apiHeaders(),
+        body:JSON.stringify({html:generatedHTML,instruction})
       }
     );
 
-    const data = await response.json();
+    const data = await readResponse(response);
 
-    if (!response.ok || !data.success || !data.html) {
-      throw new Error(
-        data.error || data.message || "Website editing failed."
-      );
-    }
+    if (!data.html) throw new Error("The editor did not return updated HTML.");
 
     generatedHTML = data.html;
 
     document.getElementById("previewFrame").srcdoc = generatedHTML;
-
     document.getElementById("downloadBtn").disabled = false;
 
     status.textContent = "🎉 Website edited successfully!";
-
-    document.getElementById("previewStatus").textContent =
-      "Your updated website is ready.";
-
+    document.getElementById("previewStatus").textContent = "Your updated website is ready.";
     document.getElementById("editInstruction").value = "";
 
-  } catch (error) {
+    document.getElementById("publishStatus").textContent =
+      "Your website has changed. Publish or republish to update the live version.";
 
+  } catch(error) {
     status.textContent = "Error: " + error.message;
-
   } finally {
-
     button.disabled = false;
-
     button.textContent = "🪄 Edit My Website";
-
   }
-
 }
 
+// PUBLISH A NEW WEBSITE
 
-// ====================================
+async function publishWebsite() {
+  const button = document.getElementById("publishBtn");
+  const status = document.getElementById("publishStatus");
+
+  if (!generatedHTML) {
+    status.textContent = "Generate a website before publishing.";
+    return;
+  }
+
+  button.disabled = true;
+  button.textContent = "Publishing Website...";
+  status.textContent = "Uploading your website to Cloudflare Pages. Please wait...";
+
+  try {
+    const response = await fetch(
+      SUPABASE_URL + "/functions/v1/sodix-hosting",
+      {
+        method:"POST",
+        headers:apiHeaders(),
+        body:JSON.stringify({html:generatedHTML})
+      }
+    );
+
+    const data = await readResponse(response);
+
+    const url = data.url || data.liveUrl;
+    const projectName = data.projectName;
+
+    if (!url || !projectName) {
+      throw new Error("Publishing response is missing the website link or project name.");
+    }
+
+    publishedProject = {
+      projectName:projectName,
+      url:url,
+      savedAt:new Date().toISOString()
+    };
+
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(publishedProject));
+
+    showLiveWebsite(url);
+    document.getElementById("republishBtn").disabled = false;
+
+    status.textContent = "Website published successfully!";
+  } catch(error) {
+    status.textContent = "Publishing error: " + error.message;
+  } finally {
+    button.disabled = false;
+    button.textContent = "🌍 Publish Website";
+  }
+}
+
+// REPUBLISH EXISTING WEBSITE
+
+async function republishWebsite() {
+  const button = document.getElementById("republishBtn");
+  const status = document.getElementById("publishStatus");
+
+  if (!generatedHTML) {
+    status.textContent = "Generate a website first.";
+    return;
+  }
+
+  if (!publishedProject || !publishedProject.projectName) {
+    status.textContent = "Publish your website first.";
+    return;
+  }
+
+  button.disabled = true;
+  button.textContent = "Updating Website...";
+  status.textContent = "Updating your existing live website...";
+
+  try {
+    const response = await fetch(
+      SUPABASE_URL + "/functions/v1/sodix-republish",
+      {
+        method:"POST",
+        headers:apiHeaders(),
+        body:JSON.stringify({
+          html:generatedHTML,
+          projectName:publishedProject.projectName
+        })
+      }
+    );
+
+    const data = await readResponse(response);
+
+    const url = data.url || data.liveUrl || publishedProject.url;
+
+    publishedProject.url = url;
+    publishedProject.savedAt = new Date().toISOString();
+
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(publishedProject));
+
+    showLiveWebsite(url);
+
+    status.textContent = "🎉 Your live website has been updated!";
+  } catch(error) {
+    status.textContent = "Update error: " + error.message;
+  } finally {
+    button.disabled = false;
+    button.textContent = "🔄 Republish / Update Website";
+  }
+}
+
+// SHOW LIVE LINK
+
+function showLiveWebsite(url) {
+  const card = document.getElementById("liveCard");
+  const link = document.getElementById("liveLink");
+
+  link.textContent = url;
+  card.style.display = "block";
+}
+
+// COPY LIVE LINK
+
+async function copyLiveLink() {
+  if (!publishedProject || !publishedProject.url) return;
+
+  try {
+    await navigator.clipboard.writeText(publishedProject.url);
+    document.getElementById("publishStatus").textContent =
+      "✅ Website link copied successfully!";
+  } catch(error) {
+    document.getElementById("publishStatus").textContent =
+      "Copy was blocked by your browser. Select and copy the link manually.";
+  }
+}
+
+// OPEN LIVE WEBSITE
+
+function openLiveLink() {
+  if (publishedProject && publishedProject.url) {
+    window.open(publishedProject.url,"_blank","noopener");
+  }
+}
+
 // DOWNLOAD WEBSITE
-// ====================================
 
 function downloadWebsite() {
-
   if (!generatedHTML) {
     alert("Generate a website first.");
     return;
   }
 
-  const blob = new Blob(
-    [generatedHTML],
-    { type: "text/html" }
-  );
-
+  const blob = new Blob([generatedHTML],{type:"text/html"});
   const url = URL.createObjectURL(blob);
-
   const link = document.createElement("a");
 
   link.href = url;
-
   link.download = "sodix-ai-website.html";
 
   document.body.appendChild(link);
-
   link.click();
-
   link.remove();
 
-  URL.revokeObjectURL(url);
-
+  setTimeout(() => URL.revokeObjectURL(url),1000);
 }
 
-
-// ====================================
 // DESKTOP AND MOBILE PREVIEW
-// ====================================
 
 function setPreview(mode) {
-
   const frame = document.getElementById("previewFrame");
 
   if (mode === "mobile") {
-
     frame.classList.add("mobile");
-
   } else {
-
     frame.classList.remove("mobile");
-
   }
-
 }
 
+// RESTORE SAVED PUBLISHED PROJECT
+
+function restorePublishedProject() {
+  if (publishedProject && publishedProject.url && publishedProject.projectName) {
+    showLiveWebsite(publishedProject.url);
+    document.getElementById("republishBtn").disabled = false;
+    document.getElementById("publishStatus").textContent =
+      "Your previously published project was found in this browser. Generate its updated HTML to republish it.";
+  }
+}
+
+restorePublishedProject();
 </script>
 
 </body>
