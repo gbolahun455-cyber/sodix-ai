@@ -148,6 +148,7 @@ footer{
     <select id="provider">
       <option value="gemini">Google Gemini</option>
       <option value="openai">OpenAI</option>
+      <option value="cloudflare">Cloudflare Workers AI</option>
     </select>
 
     <button class="primary" id="generateBtn" onclick="generateWebsite()">
@@ -192,8 +193,6 @@ footer{
     </button>
     <div class="status" id="editStatus"></div>
   </section>
-
-  <!-- PUBLISH WEBSITE -->
 
   <section class="panel">
     <h2>🚀 Publish Your Website</h2>
@@ -295,7 +294,7 @@ async function readResponse(response) {
   return data;
 }
 
-// GENERATE WEBSITE
+// GENERATE WEBSITE WITH SELECTED AI PROVIDER
 
 async function generateWebsite() {
   const prompt = document.getElementById("prompt").value.trim();
@@ -308,17 +307,32 @@ async function generateWebsite() {
     return;
   }
 
+  const providerNames = {
+    gemini: "Google Gemini",
+    openai: "OpenAI",
+    cloudflare: "Cloudflare Workers AI"
+  };
+
+  const functionName = provider === "cloudflare"
+    ? "sodix-cloudflare"
+    : "sodix-generator";
+
+  const requestBody = provider === "cloudflare"
+    ? {prompt}
+    : {prompt,provider};
+
   button.disabled = true;
   button.textContent = "Generating Website...";
-  status.textContent = "SODIX AI is building your website. Please wait.";
+  status.textContent = "SODIX AI is building your website with " +
+    providerNames[provider] + "...";
 
   try {
     const response = await fetch(
-      SUPABASE_URL + "/functions/v1/sodix-generator",
+      SUPABASE_URL + "/functions/v1/" + functionName,
       {
         method:"POST",
         headers:apiHeaders(),
-        body:JSON.stringify({prompt,provider})
+        body:JSON.stringify(requestBody)
       }
     );
 
@@ -331,9 +345,15 @@ async function generateWebsite() {
     document.getElementById("previewFrame").srcdoc = generatedHTML;
     document.getElementById("downloadBtn").disabled = false;
 
-    status.textContent = "🎉 Website generated successfully!";
-    document.getElementById("previewStatus").textContent = "Your website is ready to preview.";
-    document.getElementById("editStatus").textContent = "You can now use AI Edit to modify this website.";
+    status.textContent = "🎉 Website generated successfully with " +
+      providerNames[provider] + "!";
+
+    document.getElementById("previewStatus").textContent =
+      "Your website is ready to preview.";
+
+    document.getElementById("editStatus").textContent =
+      "You can now use AI Edit to modify this website.";
+
     document.getElementById("editInstruction").value = "";
 
     document.getElementById("publishStatus").textContent =
@@ -453,6 +473,7 @@ async function publishWebsite() {
     document.getElementById("republishBtn").disabled = false;
 
     status.textContent = "Website published successfully!";
+
   } catch(error) {
     status.textContent = "Publishing error: " + error.message;
   } finally {
@@ -506,6 +527,7 @@ async function republishWebsite() {
     showLiveWebsite(url);
 
     status.textContent = "🎉 Your live website has been updated!";
+
   } catch(error) {
     status.textContent = "Update error: " + error.message;
   } finally {
