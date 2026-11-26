@@ -43,109 +43,48 @@ footer{text-align:center;padding:30px 15px;color:var(--muted);font-size:12px;bor
 <section class="panel"><h2>🚀 Publish Your Website</h2><p class="muted">Publish your single-file generated website to your configured Cloudflare Pages project.</p><button class="publish-button" id="publishBtn" onclick="publishWebsite()">🌍 Publish Website</button><button class="republish-button" id="republishBtn" onclick="republishWebsite()" disabled>🔄 Republish / Update Website</button><div class="status" id="publishStatus">Generate a website first to publish it.</div><div class="live-card" id="liveCard"><strong>🎉 Your website is live!</strong><div class="live-link" id="liveLink"></div><div class="toolbar"><button class="secondary" onclick="copyLiveLink()">📋 Copy Link</button><button class="secondary" onclick="openLiveLink()">🌐 Visit Website</button></div></div></section>
 <section class="panel"><div class="preview-header"><h2>🌐 Website Preview</h2><div class="preview-actions"><button class="secondary" onclick="setPreview('desktop')">Desktop</button><button class="secondary" onclick="setPreview('mobile')">Mobile</button><button class="secondary" id="downloadBtn" onclick="downloadWebsite()" disabled>⬇ Download HTML</button></div></div><div class="preview-box"><iframe id="previewFrame" title="Website preview" sandbox="allow-scripts"></iframe></div><p class="status" id="previewStatus">Your generated website will appear here.</p></section>
 </div><div id="appWorkspace" style="display:none">
-
-<section class="panel">
-<h2>⚡ AI App Builder</h2>
-<p class="muted">Describe the application you want. SODIX AI will first create a blueprint, then generate a multi-file project.</p>
-
-<label for="appPrompt">What application should SODIX AI build?</label>
-<textarea id="appPrompt" placeholder="Example: Build a school management platform with student registration, teacher accounts, attendance, results and admin dashboard."></textarea>
-
-<div class="grid-two">
-<div>
-<label for="appProvider">Planner provider</label>
-<select id="appProvider">
-<option value="cloudflare">Cloudflare Workers AI (tested)</option>
-<option value="gemini">Google Gemini</option>
-<option value="openai">OpenAI</option>
-</select>
-</div>
-
-<div>
-<label for="projectNameInput">Project name (optional)</label>
-<input id="projectNameInput" placeholder="SODIX School Manager">
-</div>
-</div>
-
-<button class="primary" id="buildAppBtn" onclick="buildApplication()">⚡ Plan & Generate Application</button>
-
-<div class="status" id="appStatus">Ready to plan your application.</div>
-<div id="blueprintSummary" style="margin-top:12px"></div>
-</section>
-
-<section class="panel" id="projectPanel" style="display:none">
-
-<div class="preview-header">
-<div>
-<h2>📁 Project File Manager</h2>
-<p class="muted" id="projectDescription"></p>
-</div>
-
-<div class="preview-actions">
-<button class="secondary" onclick="saveAppProject()">💾 Save</button>
-<button class="secondary" onclick="downloadProjectZip()">⬇ Download ZIP</button>
-<button class="secondary" onclick="loadSavedAppProject()">↩ Restore Saved</button>
-</div>
-</div>
-
-<div class="toolbar">
-<span class="pill" id="fileCountPill">0 files</span>
-<span class="pill">Local browser workspace</span>
-<span class="pill">Multi-file project</span>
-</div>
-
-<div class="app-layout">
-
-<aside class="file-sidebar">
-<h3>📂 Project Files</h3>
-<div class="file-list" id="fileList"></div>
-</aside>
-
-<section class="editor-panel">
-<div class="editor-top">
-<strong id="activeFileName">Select a file</strong>
-<div>
-<button class="secondary" onclick="saveCurrentFile()">Save File</button>
-<button class="secondary" onclick="previewAppProject()">Preview</button>
-</div>
-</div>
-
-<textarea id="fileEditor" class="file-editor" spellcheck="false" placeholder="Select a file from the explorer to edit its contents."></textarea>
-</section>
-
-</div>
-
-<div class="toolbar">
-<button class="secondary" onclick="previewAppProject()">🌐 Refresh App Preview</button>
-<button class="secondary" onclick="downloadCurrentFile()">⬇ Download Current File</button>
-</div>
-
-<div class="preview-header">
-<h2>Live Application Preview</h2>
-<div class="preview-actions">
-<button class="secondary" onclick="setAppPreview('desktop')">Desktop</button>
-<button class="secondary" onclick="setAppPreview('mobile')">Mobile</button>
-</div>
-</div>
-
-<div class="preview-box">
-<iframe id="appPreviewFrame" title="Application preview" sandbox="allow-scripts allow-forms"></iframe>
-</div>
-
-<p class="status" id="appPreviewStatus">Generate a project to preview it here.</p>
-
-<p class="muted" style="margin-top:12px">
-Note: Preview runs the generated frontend only. Database SQL, authentication and server functions are files/instructions; they are not automatically deployed or provisioned. Review generated security rules before using a real application.
-</p>
-
-</section>
+<section class="panel"><h2>⚡ AI App Builder</h2><p class="muted">Describe the application you want. SODIX AI will first create a blueprint, then generate a multi-file project.</p><label for="appPrompt">What application should SODIX AI build?</label><textarea id="appPrompt" placeholder="Example: Build a school management platform with student registration, teacher accounts, attendance, results and admin dashboard."></textarea><div class="grid-two"><div><label for="appProvider">Planner provider</label><select id="appProvider"><option value="cloudflare">Cloudflare Workers AI (tested)</option><option value="gemini">Google Gemini</option><option value="openai">OpenAI</option></select></div><div><label for="projectNameInput">Project name (optional)</label><input id="projectNameInput" placeholder="SODIX School Manager"></div></div><button class="primary" id="buildAppBtn" onclick="buildApplication()">⚡ Plan & Generate Application</button><div class="status" id="appStatus">Ready to plan your application.</div><div id="blueprintSummary" style="margin-top:12px"></div></section>
+<section class="panel" id="projectPanel" style="display:none"><div class="preview-header"><div><h2>📁 Project File Manager</h2><p class="muted" id="projectDescription"></p></div><div class="preview-actions"><button class="secondary" onclick="saveAppProject()">💾 Save</button><button class="secondary" onclick="downloadProjectZip()">⬇ Download ZIP</button><button class="secondary" onclick="loadSavedAppProject()">↩ Restore Saved</button></div></div>
+<div class="toolbar"><span class="pill" id="fileCountPill">0 files</span><span class="pill">Local browser workspace</span><span class="pill">Multi-file project</span></div>
+<div class="app-layout"><aside class="file-sidebar"><h3>📂 Project Files</h3><div class="file-list" id="fileList"></div></aside><section class="editor-panel"><div class="editor-top"><strong id="activeFileName">Select a file</strong><div><button class="secondary" onclick="saveCurrentFile()">Save File</button><button class="secondary" onclick="previewAppProject()">Preview</button></div></div><textarea id="fileEditor" class="file-editor" spellcheck="false" placeholder="Select a file from the explorer to edit its contents."></textarea></section></div>
+<div class="toolbar"><button class="secondary" onclick="previewAppProject()">🌐 Refresh App Preview</button><button class="secondary" onclick="downloadCurrentFile()">⬇ Download Current File</button></div><div class="preview-header"><h2>Live Application Preview</h2><div class="preview-actions"><button class="secondary" onclick="setAppPreview('desktop')">Desktop</button><button class="secondary" onclick="setAppPreview('mobile')">Mobile</button></div></div><div class="preview-box"><iframe id="appPreviewFrame" title="Application preview" sandbox="allow-scripts allow-forms"></iframe></div><p class="status" id="appPreviewStatus">Generate a project to preview it here.</p><p class="muted" style="margin-top:12px">Note: Preview runs the generated frontend only. Database SQL, authentication and server functions are files/instructions; they are not automatically deployed or provisioned. Review generated security rules before using a real application.</p></section>
 </div>
 </main>
-
-<footer>
-<p>SODIX AI — Imagine It. Describe It. Build It.</p>
-<p style="margin-top:8px">Created with innovation by <span>Ogunlowo Sodiq</span></p>
-</footer>const gr=await fetch(SUPABASE_URL+"/functions/v1/sodix-project-generator",{method:"POST",headers:apiHeaders(),body:JSON.stringify({blueprint})});
+<footer><p>SODIX AI — Imagine It. Describe It. Build It.</p><p style="margin-top:8px">Created with innovation by <span>Ogunlowo Sodiq</span></p></footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>
+const SUPABASE_URL="https://hmjjbdigpguhxtoxtzyz.supabase.co";
+const SUPABASE_KEY="sb_publishable_QJL0y2H6COGc3PyMWdFwpA_M_e7aLV6";
+const STORAGE_KEY="sodix_published_project";
+const APP_STORAGE_KEY="sodix_ai_saved_app_project";
+let generatedHTML="";
+let publishedProject=null;
+let appProject=null;
+let activeFilePath="";
+try{publishedProject=JSON.parse(localStorage.getItem(STORAGE_KEY)||"null")}catch(e){publishedProject=null}
+function apiHeaders(){return{"Content-Type":"application/json","apikey":SUPABASE_KEY,"Authorization":"Bearer "+SUPABASE_KEY}}
+async function readResponse(response){const t=await response.text();let d;try{d=JSON.parse(t)}catch{throw new Error("Server returned an invalid response: "+t.slice(0,250))}if(!response.ok||d.success===false)throw new Error(d.error||d.message||"Request failed");return d}
+function showWorkspace(which){document.getElementById("websiteWorkspace").style.display=which==="website"?"block":"none";document.getElementById("appWorkspace").style.display=which==="app"?"block":"none";document.getElementById("websiteTab").classList.toggle("active",which==="website");document.getElementById("appTab").classList.toggle("active",which==="app")}
+function useTemplate(t){document.getElementById("prompt").value=t;window.scrollTo({top:0,behavior:"smooth"})}
+async function generateWebsite(){const prompt=document.getElementById("prompt").value.trim(),provider=document.getElementById("provider").value,btn=document.getElementById("generateBtn"),status=document.getElementById("status");if(!prompt){status.textContent="Please describe the website you want.";return}const fn=provider==="cloudflare"?"sodix-cloudflare":"sodix-generator",body=provider==="cloudflare"?{prompt}:{prompt,provider};btn.disabled=true;btn.textContent="Generating Website...";status.textContent="SODIX AI is generating your website...";try{const r=await fetch(SUPABASE_URL+"/functions/v1/"+fn,{method:"POST",headers:apiHeaders(),body:JSON.stringify(body)});const d=await readResponse(r);if(!d.html)throw new Error("No website HTML was returned.");generatedHTML=d.html;document.getElementById("previewFrame").srcdoc=generatedHTML;document.getElementById("downloadBtn").disabled=false;status.textContent="Website generated successfully!";document.getElementById("previewStatus").textContent="Your website is ready.";document.getElementById("publishStatus").textContent="Your website is ready to publish."}catch(e){status.textContent="Error: "+e.message}finally{btn.disabled=false;btn.textContent="✨ Generate My Website"}}
+async function editWebsite(){const instruction=document.getElementById("editInstruction").value.trim(),btn=document.getElementById("editBtn"),status=document.getElementById("editStatus");if(!generatedHTML){status.textContent="Generate a website before editing.";return}if(!instruction){status.textContent="Describe the change first.";return}btn.disabled=true;btn.textContent="Editing...";try{const r=await fetch(SUPABASE_URL+"/functions/v1/sodix-editor",{method:"POST",headers:apiHeaders(),body:JSON.stringify({html:generatedHTML,instruction})});const d=await readResponse(r);if(!d.html)throw new Error("Editor returned no HTML.");generatedHTML=d.html;document.getElementById("previewFrame").srcdoc=generatedHTML;status.textContent="Website edited successfully.";document.getElementById("publishStatus").textContent="Website changed. Republish to update the live version."}catch(e){status.textContent="Error: "+e.message}finally{btn.disabled=false;btn.textContent="🪄 Edit My Website"}}
+async function publishWebsite(){const btn=document.getElementById("publishBtn"),status=document.getElementById("publishStatus");if(!generatedHTML){status.textContent="Generate a website first.";return}btn.disabled=true;btn.textContent="Publishing...";try{const r=await fetch(SUPABASE_URL+"/functions/v1/sodix-hosting-v2",{method:"POST",headers:apiHeaders(),body:JSON.stringify({html:generatedHTML})});const d=await readResponse(r),url=d.url||d.liveUrl;if(!url||!d.projectName)throw new Error("Publishing response is missing URL or project name.");publishedProject={projectName:d.projectName,url,savedAt:new Date().toISOString()};localStorage.setItem(STORAGE_KEY,JSON.stringify(publishedProject));showLiveWebsite(url);document.getElementById("republishBtn").disabled=false;status.textContent="Website published successfully."}catch(e){status.textContent="Publishing error: "+e.message}finally{btn.disabled=false;btn.textContent="🌍 Publish Website"}}
+async function republishWebsite(){const btn=document.getElementById("republishBtn"),status=document.getElementById("publishStatus");if(!generatedHTML||!publishedProject?.projectName){status.textContent="Publish a website first.";return}btn.disabled=true;btn.textContent="Updating...";try{const r=await fetch(SUPABASE_URL+"/functions/v1/sodix-republish",{method:"POST",headers:apiHeaders(),body:JSON.stringify({html:generatedHTML,projectName:publishedProject.projectName})});const d=await readResponse(r);publishedProject.url=d.url||d.liveUrl||publishedProject.url;publishedProject.savedAt=new Date().toISOString();localStorage.setItem(STORAGE_KEY,JSON.stringify(publishedProject));showLiveWebsite(publishedProject.url);status.textContent="Live website updated."}catch(e){status.textContent="Update error: "+e.message}finally{btn.disabled=false;btn.textContent="🔄 Republish / Update Website"}}
+function showLiveWebsite(url){document.getElementById("liveCard").style.display="block";document.getElementById("liveLink").textContent=url}
+async function copyLiveLink(){if(!publishedProject?.url)return;try{await navigator.clipboard.writeText(publishedProject.url);document.getElementById("publishStatus").textContent="Link copied."}catch{document.getElementById("publishStatus").textContent="Copy blocked; select the link manually."}}
+function openLiveLink(){if(publishedProject?.url)window.open(publishedProject.url,"_blank","noopener")}
+function downloadWebsite(){if(!generatedHTML)return alert("Generate a website first.");downloadBlob(generatedHTML,"sodix-ai-website.html","text/html")}
+function setPreview(mode){document.getElementById("previewFrame").classList.toggle("mobile",mode==="mobile")}
+function downloadBlob(content,name,type){const b=new Blob([content],{type}),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1500)}
+function restorePublishedProject(){if(publishedProject?.url&&publishedProject?.projectName){showLiveWebsite(publishedProject.url);document.getElementById("republishBtn").disabled=false;document.getElementById("publishStatus").textContent="Previously published project found in this browser."}}
+function safeFilePath(path){return typeof path==="string"&&path.trim()&&!path.startsWith("/")&&!path.includes("..")&&!path.includes("\\")}
+function escapeHTML(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+async function buildApplication(){const prompt=document.getElementById("appPrompt").value.trim(),provider=document.getElementById("appProvider").value,btn=document.getElementById("buildAppBtn"),status=document.getElementById("appStatus");if(!prompt){status.textContent="Describe the application first.";return}btn.disabled=true;btn.textContent="Planning application...";status.textContent="Step 1 of 2: SODIX AI is creating your application blueprint...";document.getElementById("blueprintSummary").innerHTML="";try{
+const pr=await fetch(SUPABASE_URL+"/functions/v1/sodix-planner-v2",{method:"POST",headers:apiHeaders(),body:JSON.stringify({prompt,provider})});
+const pd=await readResponse(pr);let blueprint=pd.blueprint||pd.plan||pd.data?.blueprint;
+if(!blueprint)throw new Error("Planner response did not contain a blueprint. Response keys: "+Object.keys(pd).join(", "));
+const override=document.getElementById("projectNameInput").value.trim();if(override)blueprint.projectName=override;
+document.getElementById("blueprintSummary").innerHTML='<span class="pill">Blueprint ready</span> <span class="pill">'+escapeHTML(blueprint.projectName||"Untitled project")+'</span> <span class="pill">'+(Array.isArray(blueprint.features)?blueprint.features.length:0)+' planned features</span>';const gr=await fetch(SUPABASE_URL+"/functions/v1/sodix-project-generator",{method:"POST",headers:apiHeaders(),body:JSON.stringify({blueprint})});
 const gd=await readResponse(gr);
 const project=gd.project||gd.data?.project;
 
@@ -336,3 +275,4 @@ restorePublishedProject();
 </script>
 </body>
 </html>
+status.textContent="Step 2 of 2: Generating project files with Cloudflare Workers AI...";
