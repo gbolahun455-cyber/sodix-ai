@@ -158,7 +158,7 @@ document.getElementById("appPreviewStatus").textContent="No index.html file was 
 return
 }
 
-const inject=(tag,content)=>{if(!content)return"";return tag==="css"?"<style>\n"+content+"\n</style>":"<script>\n"+content.replace(/<\/script/gi,"<\\/script")+"\n</script>"};
+const inject=(tag,content)=>{if(!content)return"";return tag==="css"?"<style>\n"+content+"\n</style>":"<script>\n"+content.replace(/<\/script/gi,"<\\/script")+"\n<"+"/script>"};
 
 const css=getFile("style.css"),js=getFile("app.js");
 
