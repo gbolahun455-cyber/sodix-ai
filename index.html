@@ -3,619 +3,336 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SODIX AI — AI Website Builder</title>
-
+<title>SODIX AI — AI Website & App Builder</title>
 <style>
-:root {
-  --bg:#080b16;
-  --panel:#111729;
-  --panel2:#171f35;
-  --purple:#8b5cf6;
-  --blue:#2563eb;
-  --text:#f8fafc;
-  --muted:#94a3b8;
-  --border:#27334c;
-  --green:#10b981;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
-header{
-  padding:18px 6%;display:flex;justify-content:space-between;
-  align-items:center;border-bottom:1px solid var(--border);
-  background:#0b1020;gap:12px
-}
-.logo{font-size:24px;font-weight:900;letter-spacing:1px}
-.logo span,footer span{color:#a78bfa}
-.tagline{color:var(--muted);font-size:12px;margin-top:5px}
-.badge{background:#1d1740;color:#c4b5fd;padding:8px 12px;border-radius:20px;font-size:12px}
-.hero{text-align:center;padding:55px 15px 30px}
-.hero h1{font-size:clamp(30px,6vw,55px);line-height:1.15}
-.hero h1 span{
-  background:linear-gradient(90deg,#a78bfa,#38bdf8);
-  -webkit-background-clip:text;color:transparent
-}
-.hero p{color:var(--muted);margin-top:15px}
-.container{width:92%;max-width:1250px;margin:auto}
-.panel{
-  background:var(--panel);border:1px solid var(--border);
-  padding:22px;border-radius:17px;margin-bottom:22px
-}
-.panel h2{font-size:19px;margin-bottom:15px}
-label{display:block;color:var(--muted);font-size:13px;margin-bottom:9px}
-textarea,select{
-  width:100%;padding:15px;border-radius:11px;
-  background:#080e1e;border:1px solid var(--border);
-  color:white;outline:none;font-family:inherit;font-size:14px
-}
-textarea{min-height:125px;resize:vertical}
-textarea:focus,select:focus{border-color:var(--purple)}
-select{margin-top:10px;cursor:pointer}
-button{
-  border:none;padding:13px 19px;border-radius:10px;
-  font-weight:bold;cursor:pointer;color:white;transition:.2s
-}
-button:hover{opacity:.88;transform:translateY(-1px)}
-button:disabled{opacity:.5;cursor:not-allowed;transform:none}
-.primary{
-  background:linear-gradient(100deg,var(--purple),var(--blue));
-  width:100%;margin-top:15px
-}
-.secondary{background:#27334c}
-.edit-button{
-  background:linear-gradient(100deg,#0ea5e9,#6366f1);
-  width:100%;margin-top:15px
-}
-.publish-button{
-  background:linear-gradient(100deg,#059669,#10b981);
-  width:100%;margin-top:12px
-}
-.republish-button{
-  background:linear-gradient(100deg,#7c3aed,#4f46e5);
-  width:100%;margin-top:12px
-}
-.status{
-  margin-top:14px;color:#a78bfa;font-size:13px;
-  min-height:18px;overflow-wrap:anywhere
-}
-.live-card{
-  display:none;margin-top:18px;padding:16px;
-  background:#0b1d1b;border:1px solid #166534;
-  border-radius:12px;overflow-wrap:anywhere
-}
-.live-card strong{color:#6ee7b7;display:block;margin-bottom:9px}
-.live-link{color:#67e8f9;word-break:break-all;font-size:13px}
-.live-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}
-.live-actions button{font-size:12px}
-.preview-header{
-  display:flex;justify-content:space-between;align-items:center;
-  gap:12px;flex-wrap:wrap;margin-bottom:15px
-}
-.preview-actions{display:flex;gap:8px;flex-wrap:wrap}
-.preview-actions button{font-size:12px;padding:10px 13px}
-.preview-box{background:white;border-radius:12px;overflow:hidden;min-height:400px}
-iframe{width:100%;height:650px;display:block;border:none;background:white}
-iframe.mobile{
-  width:390px;max-width:100%;margin:auto;
-  border-left:5px solid #222;border-right:5px solid #222;border-radius:12px
-}
-.templates{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px
-}
-.template{
-  background:var(--panel2);border:1px solid var(--border);
-  padding:17px;border-radius:12px;text-align:center;
-  cursor:pointer;transition:.2s
-}
-.template:hover{border-color:var(--purple);transform:translateY(-3px)}
-.template strong{display:block;margin-bottom:6px}
-.template small{color:var(--muted)}
-footer{
-  text-align:center;padding:30px 15px;color:var(--muted);
-  font-size:12px;border-top:1px solid var(--border);margin-top:35px
-}
-@media(max-width:600px){
-  header{padding:15px 4%}
-  .badge{font-size:10px}
-  .panel{padding:16px}
-  iframe{height:520px}
-}
+:root{--bg:#080b16;--panel:#111729;--panel2:#171f35;--purple:#8b5cf6;--blue:#2563eb;--text:#f8fafc;--muted:#94a3b8;--border:#27334c;--green:#10b981}
+*{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
+header{padding:18px 6%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);background:#0b1020;gap:12px}
+.logo{font-size:24px;font-weight:900;letter-spacing:1px}.logo span,footer span{color:#a78bfa}.tagline{color:var(--muted);font-size:12px;margin-top:5px}.badge{background:#1d1740;color:#c4b5fd;padding:8px 12px;border-radius:20px;font-size:12px}
+.hero{text-align:center;padding:45px 15px 25px}.hero h1{font-size:clamp(30px,6vw,55px);line-height:1.15}.hero h1 span{background:linear-gradient(90deg,#a78bfa,#38bdf8);-webkit-background-clip:text;color:transparent}.hero p{color:var(--muted);margin-top:15px}
+.container{width:94%;max-width:1300px;margin:auto}.panel{background:var(--panel);border:1px solid var(--border);padding:22px;border-radius:17px;margin-bottom:22px}.panel h2{font-size:19px;margin-bottom:15px}
+label{display:block;color:var(--muted);font-size:13px;margin:12px 0 8px}textarea,select,input{width:100%;padding:13px;border-radius:10px;background:#080e1e;border:1px solid var(--border);color:white;outline:none;font-family:inherit;font-size:14px}textarea{min-height:115px;resize:vertical}textarea:focus,select:focus,input:focus{border-color:var(--purple)}
+button{border:none;padding:12px 17px;border-radius:10px;font-weight:bold;cursor:pointer;color:white;transition:.2s}button:hover{opacity:.88}button:disabled{opacity:.5;cursor:not-allowed}
+.primary{background:linear-gradient(100deg,var(--purple),var(--blue));width:100%;margin-top:14px}.secondary{background:#27334c}.edit-button{background:linear-gradient(100deg,#0ea5e9,#6366f1);width:100%;margin-top:14px}.publish-button{background:linear-gradient(100deg,#059669,#10b981);width:100%;margin-top:12px}.republish-button{background:linear-gradient(100deg,#7c3aed,#4f46e5);width:100%;margin-top:12px}
+.status{margin-top:12px;color:#a78bfa;font-size:13px;min-height:18px;overflow-wrap:anywhere}.muted{color:var(--muted);font-size:13px;line-height:1.6}
+.tabs{display:flex;gap:9px;flex-wrap:wrap;margin:0 auto 22px}.tab{background:#1b2540;border:1px solid var(--border)}.tab.active{background:linear-gradient(100deg,var(--purple),var(--blue))}
+.templates{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}.template{background:var(--panel2);border:1px solid var(--border);padding:17px;border-radius:12px;text-align:center;cursor:pointer}.template:hover{border-color:var(--purple)}.template strong{display:block;margin-bottom:6px}.template small{color:var(--muted)}
+.live-card{display:none;margin-top:18px;padding:16px;background:#0b1d1b;border:1px solid #166534;border-radius:12px;overflow-wrap:anywhere}.live-card strong{color:#6ee7b7;display:block;margin-bottom:9px}.live-link{color:#67e8f9;word-break:break-all;font-size:13px}
+.preview-header{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:15px}.preview-actions{display:flex;gap:8px;flex-wrap:wrap}.preview-actions button{font-size:12px;padding:10px 13px}.preview-box{background:white;border-radius:12px;overflow:hidden;min-height:300px}iframe{width:100%;height:600px;display:block;border:none;background:white}iframe.mobile{width:390px;max-width:100%;margin:auto;border-left:5px solid #222;border-right:5px solid #222;border-radius:12px}
+.app-layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:14px}.file-sidebar,.editor-panel{background:#0b1020;border:1px solid var(--border);border-radius:12px;overflow:hidden}.file-sidebar h3,.editor-top{padding:13px;border-bottom:1px solid var(--border);font-size:14px}.file-list{padding:8px;max-height:390px;overflow:auto}.file-item{width:100%;text-align:left;background:transparent;color:#cbd5e1;padding:10px;border-radius:7px;font-size:12px;overflow-wrap:anywhere}.file-item.active,.file-item:hover{background:#202b48;color:white}.editor-top{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}.editor-top button{padding:8px 11px;font-size:12px}.file-editor{width:100%;min-height:400px;border:0;border-radius:0;background:#070b14;color:#dbeafe;font:13px/1.55 monospace;resize:vertical;padding:15px;white-space:pre;tab-size:2}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.toolbar button{font-size:12px}.grid-two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.pill{display:inline-block;padding:5px 9px;background:#1d1740;color:#c4b5fd;border-radius:20px;font-size:11px;margin:3px}
+footer{text-align:center;padding:30px 15px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);margin-top:35px}
+@media(max-width:700px){header{padding:15px 4%}.panel{padding:16px}.app-layout{grid-template-columns:1fr}.file-list{max-height:180px}.file-editor{min-height:330px}.grid-two{grid-template-columns:1fr}iframe{height:500px}}
 </style>
 </head>
-
 <body>
+<header><div><div class="logo">SODIX<span> AI</span></div><div class="tagline">Imagine It. Describe It. Build It.</div></div><div class="badge">AI WEBSITE & APP BUILDER</div></header>
+<section class="hero"><h1>Build With AI.<br><span>Turn Ideas Into Projects.</span></h1><p>Create websites and multi-file applications with SODIX AI.</p></section>
+<main class="container">
+<div class="tabs"><button class="tab active" id="websiteTab" onclick="showWorkspace('website')">🌐 Website Builder</button><button class="tab" id="appTab" onclick="showWorkspace('app')">⚡ AI App Builder</button></div>
 
-<header>
-  <div>
-    <div class="logo">SODIX<span> AI</span></div>
-    <div class="tagline">Imagine It. Describe It. Build It.</div>
-  </div>
-  <div class="badge">AI WEBSITE BUILDER</div>
-</header>
+<div id="websiteWorkspace">
+<section class="panel"><h2>✨ Create a Website</h2><label for="prompt">Describe the website you want to build</label><textarea id="prompt" placeholder="Build a professional website for a technology company with homepage, services, about and contact sections."></textarea><label for="provider">AI Provider</label><select id="provider"><option value="gemini">Google Gemini</option><option value="openai">OpenAI</option><option value="cloudflare">Cloudflare Workers AI</option></select><button class="primary" id="generateBtn" onclick="generateWebsite()">✨ Generate My Website</button><div class="status" id="status"></div></section>
+<section class="panel"><h2>🚀 Try an Idea</h2><div class="templates">
+<div class="template" onclick="useTemplate('Build a modern professional business website with homepage, about, services, testimonials and contact section.')"><strong>🏢 Business</strong><small>Company website</small></div>
+<div class="template" onclick="useTemplate('Build a beautiful modern online shopping website with product cards, categories, shopping cart interface and checkout demonstration.')"><strong>🛍️ Store</strong><small>Online shop</small></div>
+<div class="template" onclick="useTemplate('Build a modern school website with admission information, courses, school activities, about and contact information.')"><strong>🎓 School</strong><small>Education website</small></div>
+<div class="template" onclick="useTemplate('Build a professional personal portfolio website with projects, skills, about me and contact sections.')"><strong>💻 Portfolio</strong><small>Personal website</small></div>
+<div class="template" onclick="useTemplate('Build a modern restaurant website with food menu, opening hours and reservation interface.')"><strong>🍽️ Restaurant</strong><small>Food website</small></div>
+<div class="template" onclick="useTemplate('Build a modern technology startup website with futuristic design, features, services and contact section.')"><strong>🤖 Technology</strong><small>Tech website</small></div></div></section>
+<section class="panel"><h2>🪄 AI Website Editor</h2><p class="muted">Tell SODIX AI what you want to change in your generated website.</p><label for="editInstruction">What should SODIX AI change?</label><textarea id="editInstruction" placeholder="Change the background to black and add a contact section."></textarea><button class="edit-button" id="editBtn" onclick="editWebsite()">🪄 Edit My Website</button><div class="status" id="editStatus"></div></section>
+<section class="panel"><h2>🚀 Publish Your Website</h2><p class="muted">Publish your single-file generated website to your configured Cloudflare Pages project.</p><button class="publish-button" id="publishBtn" onclick="publishWebsite()">🌍 Publish Website</button><button class="republish-button" id="republishBtn" onclick="republishWebsite()" disabled>🔄 Republish / Update Website</button><div class="status" id="publishStatus">Generate a website first to publish it.</div><div class="live-card" id="liveCard"><strong>🎉 Your website is live!</strong><div class="live-link" id="liveLink"></div><div class="toolbar"><button class="secondary" onclick="copyLiveLink()">📋 Copy Link</button><button class="secondary" onclick="openLiveLink()">🌐 Visit Website</button></div></div></section>
+<section class="panel"><div class="preview-header"><h2>🌐 Website Preview</h2><div class="preview-actions"><button class="secondary" onclick="setPreview('desktop')">Desktop</button><button class="secondary" onclick="setPreview('mobile')">Mobile</button><button class="secondary" id="downloadBtn" onclick="downloadWebsite()" disabled>⬇ Download HTML</button></div></div><div class="preview-box"><iframe id="previewFrame" title="Website preview" sandbox="allow-scripts"></iframe></div><p class="status" id="previewStatus">Your generated website will appear here.</p></section>
+</div><div id="appWorkspace" style="display:none">
 
-<section class="hero">
-  <h1>Build Your Website<br><span>With Artificial Intelligence.</span></h1>
-  <p>Describe your idea. Let SODIX AI bring it to life.</p>
+<section class="panel">
+<h2>⚡ AI App Builder</h2>
+<p class="muted">Describe the application you want. SODIX AI will first create a blueprint, then generate a multi-file project.</p>
+
+<label for="appPrompt">What application should SODIX AI build?</label>
+<textarea id="appPrompt" placeholder="Example: Build a school management platform with student registration, teacher accounts, attendance, results and admin dashboard."></textarea>
+
+<div class="grid-two">
+<div>
+<label for="appProvider">Planner provider</label>
+<select id="appProvider">
+<option value="cloudflare">Cloudflare Workers AI (tested)</option>
+<option value="gemini">Google Gemini</option>
+<option value="openai">OpenAI</option>
+</select>
+</div>
+
+<div>
+<label for="projectNameInput">Project name (optional)</label>
+<input id="projectNameInput" placeholder="SODIX School Manager">
+</div>
+</div>
+
+<button class="primary" id="buildAppBtn" onclick="buildApplication()">⚡ Plan & Generate Application</button>
+
+<div class="status" id="appStatus">Ready to plan your application.</div>
+<div id="blueprintSummary" style="margin-top:12px"></div>
 </section>
 
-<main class="container">
+<section class="panel" id="projectPanel" style="display:none">
 
-  <section class="panel">
-    <h2>✨ Create a Website</h2>
-    <label for="prompt">Describe the website you want to build</label>
-    <textarea id="prompt" placeholder="Example: Build a professional website for a technology company with a beautiful homepage, services, about section and contact form."></textarea>
+<div class="preview-header">
+<div>
+<h2>📁 Project File Manager</h2>
+<p class="muted" id="projectDescription"></p>
+</div>
 
-    <label for="provider" style="margin-top:15px">AI Provider</label>
-    <select id="provider">
-      <option value="gemini">Google Gemini</option>
-      <option value="openai">OpenAI</option>
-      <option value="cloudflare">Cloudflare Workers AI</option>
-    </select>
+<div class="preview-actions">
+<button class="secondary" onclick="saveAppProject()">💾 Save</button>
+<button class="secondary" onclick="downloadProjectZip()">⬇ Download ZIP</button>
+<button class="secondary" onclick="loadSavedAppProject()">↩ Restore Saved</button>
+</div>
+</div>
 
-    <button class="primary" id="generateBtn" onclick="generateWebsite()">
-      ✨ Generate My Website
-    </button>
-    <div class="status" id="status"></div>
-  </section>
+<div class="toolbar">
+<span class="pill" id="fileCountPill">0 files</span>
+<span class="pill">Local browser workspace</span>
+<span class="pill">Multi-file project</span>
+</div>
 
-  <section class="panel">
-    <h2>🚀 Try an Idea</h2>
-    <div class="templates">
-      <div class="template" onclick="useTemplate('Build a modern professional business website with homepage, about, services, testimonials and contact section.')">
-        <strong>🏢 Business</strong><small>Company website</small>
-      </div>
-      <div class="template" onclick="useTemplate('Build a beautiful modern online shopping website with product cards, categories, shopping cart interface and checkout demonstration.')">
-        <strong>🛍️ Store</strong><small>Online shop</small>
-      </div>
-      <div class="template" onclick="useTemplate('Build a modern school website with admission information, courses, school activities, about section and contact information.')">
-        <strong>🎓 School</strong><small>Education website</small>
-      </div>
-      <div class="template" onclick="useTemplate('Build a professional personal portfolio website for a young technology developer with projects, skills, about me and contact sections.')">
-        <strong>💻 Portfolio</strong><small>Personal website</small>
-      </div>
-      <div class="template" onclick="useTemplate('Build a modern restaurant website with food menu, restaurant information, opening hours and reservation interface.')">
-        <strong>🍽️ Restaurant</strong><small>Food website</small>
-      </div>
-      <div class="template" onclick="useTemplate('Build a modern technology startup website with a futuristic design, features, services, about section and contact section.')">
-        <strong>🤖 Technology</strong><small>Tech website</small>
-      </div>
-    </div>
-  </section>
+<div class="app-layout">
 
-  <section class="panel">
-    <h2>🪄 AI Website Editor</h2>
-    <p style="color:var(--muted);font-size:13px;margin-bottom:15px">
-      Already generated a website? Tell SODIX AI what you want to change.
-    </p>
-    <label for="editInstruction">What should SODIX AI change?</label>
-    <textarea id="editInstruction" placeholder="Example: Change the background to black, make the heading larger and add a contact section."></textarea>
-    <button class="edit-button" id="editBtn" onclick="editWebsite()">
-      🪄 Edit My Website
-    </button>
-    <div class="status" id="editStatus"></div>
-  </section>
+<aside class="file-sidebar">
+<h3>📂 Project Files</h3>
+<div class="file-list" id="fileList"></div>
+</aside>
 
-  <section class="panel">
-    <h2>🚀 Publish Your Website</h2>
-    <p style="color:var(--muted);font-size:13px;line-height:1.6">
-      Publish your generated website and receive a live link that you can share with anyone.
-    </p>
+<section class="editor-panel">
+<div class="editor-top">
+<strong id="activeFileName">Select a file</strong>
+<div>
+<button class="secondary" onclick="saveCurrentFile()">Save File</button>
+<button class="secondary" onclick="previewAppProject()">Preview</button>
+</div>
+</div>
 
-    <button class="publish-button" id="publishBtn" onclick="publishWebsite()">
-      🌍 Publish Website
-    </button>
+<textarea id="fileEditor" class="file-editor" spellcheck="false" placeholder="Select a file from the explorer to edit its contents."></textarea>
+</section>
 
-    <button class="republish-button" id="republishBtn" onclick="republishWebsite()" disabled>
-      🔄 Republish / Update Website
-    </button>
+</div>
 
-    <div class="status" id="publishStatus">
-      Generate a website first to publish it.
-    </div>
+<div class="toolbar">
+<button class="secondary" onclick="previewAppProject()">🌐 Refresh App Preview</button>
+<button class="secondary" onclick="downloadCurrentFile()">⬇ Download Current File</button>
+</div>
 
-    <div class="live-card" id="liveCard">
-      <strong>🎉 Your website is live!</strong>
-      <div class="live-link" id="liveLink"></div>
-      <div class="live-actions">
-        <button class="secondary" onclick="copyLiveLink()">📋 Copy Link</button>
-        <button class="secondary" onclick="openLiveLink()">🌐 Visit Website</button>
-      </div>
-    </div>
-  </section>
+<div class="preview-header">
+<h2>Live Application Preview</h2>
+<div class="preview-actions">
+<button class="secondary" onclick="setAppPreview('desktop')">Desktop</button>
+<button class="secondary" onclick="setAppPreview('mobile')">Mobile</button>
+</div>
+</div>
 
-  <section class="panel">
-    <div class="preview-header">
-      <h2>🌐 Website Preview</h2>
-      <div class="preview-actions">
-        <button class="secondary" onclick="setPreview('desktop')">Desktop</button>
-        <button class="secondary" onclick="setPreview('mobile')">Mobile</button>
-        <button class="secondary" id="downloadBtn" onclick="downloadWebsite()" disabled>
-          ⬇ Download
-        </button>
-      </div>
-    </div>
+<div class="preview-box">
+<iframe id="appPreviewFrame" title="Application preview" sandbox="allow-scripts allow-forms"></iframe>
+</div>
 
-    <div class="preview-box">
-      <iframe id="previewFrame" title="Generated website preview" sandbox="allow-scripts"></iframe>
-    </div>
+<p class="status" id="appPreviewStatus">Generate a project to preview it here.</p>
 
-    <p class="status" id="previewStatus">Your generated website will appear here.</p>
-  </section>
+<p class="muted" style="margin-top:12px">
+Note: Preview runs the generated frontend only. Database SQL, authentication and server functions are files/instructions; they are not automatically deployed or provisioned. Review generated security rules before using a real application.
+</p>
 
+</section>
+</div>
 </main>
 
 <footer>
-  <p>SODIX AI — Imagine It. Describe It. Build It.</p>
-  <p style="margin-top:8px">Created with innovation by <span>Ogunlowo Sodiq</span></p>
-</footer>
+<p>SODIX AI — Imagine It. Describe It. Build It.</p>
+<p style="margin-top:8px">Created with innovation by <span>Ogunlowo Sodiq</span></p>
+</footer>const gr=await fetch(SUPABASE_URL+"/functions/v1/sodix-project-generator",{method:"POST",headers:apiHeaders(),body:JSON.stringify({blueprint})});
+const gd=await readResponse(gr);
+const project=gd.project||gd.data?.project;
 
-<script>
-const SUPABASE_URL = "https://hmjjbdigpguhxtoxtzyz.supabase.co";
-const SUPABASE_KEY = "sb_publishable_QJL0y2H6COGc3PyMWdFwpA_M_e7aLV6";
+if(!project||!Array.isArray(project.files))throw new Error("Project generator response did not contain a files array.");
 
-let generatedHTML = "";
+const files=project.files.filter(f=>safeFilePath(f.path)&&typeof f.content==="string").map(f=>({path:f.path,language:f.language||"text",content:f.content}));
 
-const STORAGE_KEY = "sodix_published_project";
+if(!files.length)throw new Error("The generator returned no valid files.");
 
-let publishedProject = null;
+appProject={
+projectName:project.projectName||blueprint.projectName||"SODIX Project",
+description:project.description||blueprint.description||"",
+files,
+dependencies:project.dependencies||[],
+environmentVariables:project.environmentVariables||[],
+setupInstructions:project.setupInstructions||[],
+warnings:project.warnings||[],
+blueprint,
+generatedAt:new Date().toISOString()
+};
 
-try {
-  publishedProject = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
-} catch (e) {
-  publishedProject = null;
+activeFilePath=files[0].path;
+renderFileList();
+openProjectFile(activeFilePath);
+document.getElementById("projectDescription").textContent=appProject.description;
+document.getElementById("fileCountPill").textContent=files.length+" files";
+document.getElementById("projectPanel").style.display="block";
+previewAppProject();
+status.textContent="Success! Generated "+files.length+" project files. Review and configure the project before real deployment.";
+document.getElementById("projectPanel").scrollIntoView({behavior:"smooth",block:"start"});
+
+}catch(e){
+status.textContent="App Builder error: "+e.message
+}finally{
+btn.disabled=false;
+btn.textContent="⚡ Plan & Generate Application"
+}}
+
+function renderFileList(){
+const box=document.getElementById("fileList");
+box.innerHTML="";
+if(!appProject)return;
+appProject.files.forEach(f=>{
+const b=document.createElement("button");
+b.className="file-item"+(f.path===activeFilePath?" active":"");
+b.textContent="📄 "+f.path;
+b.onclick=()=>openProjectFile(f.path);
+box.appendChild(b)
+})
 }
 
-function useTemplate(text) {
-  document.getElementById("prompt").value = text;
-  window.scrollTo({top:0,behavior:"smooth"});
+function openProjectFile(path){
+if(!appProject)return;
+const f=appProject.files.find(x=>x.path===path);
+if(!f)return;
+activeFilePath=path;
+document.getElementById("activeFileName").textContent=path;
+document.getElementById("fileEditor").value=f.content;
+renderFileList()
 }
 
-function apiHeaders() {
-  return {
-    "Content-Type":"application/json",
-    "apikey":SUPABASE_KEY,
-    "Authorization":"Bearer " + SUPABASE_KEY
-  };
+function saveCurrentFile(){
+if(!appProject||!activeFilePath)return;
+const f=appProject.files.find(x=>x.path===activeFilePath);
+if(!f)return;
+f.content=document.getElementById("fileEditor").value;
+document.getElementById("appStatus").textContent="Saved changes to "+activeFilePath;
+renderFileList()
 }
 
-async function readResponse(response) {
-  const text = await response.text();
-  let data;
-
-  try {
-    data = JSON.parse(text);
-  } catch {
-    throw new Error("The server returned an invalid response.");
-  }
-
-  if (!response.ok || data.success === false) {
-    throw new Error(data.error || data.message || "The request failed.");
-  }
-
-  return data;
+function getFile(path){
+return appProject?.files.find(f=>f.path===path)?.content||""
 }
 
-// GENERATE WEBSITE WITH SELECTED AI PROVIDER
+function previewAppProject(){
+if(!appProject)return;
+saveCurrentFile();
+let html=getFile("index.html");
 
-async function generateWebsite() {
-  const prompt = document.getElementById("prompt").value.trim();
-  const provider = document.getElementById("provider").value;
-  const button = document.getElementById("generateBtn");
-  const status = document.getElementById("status");
-
-  if (!prompt) {
-    status.textContent = "Please describe the website you want.";
-    return;
-  }
-
-  const providerNames = {
-    gemini: "Google Gemini",
-    openai: "OpenAI",
-    cloudflare: "Cloudflare Workers AI"
-  };
-
-  const functionName = provider === "cloudflare"
-    ? "sodix-cloudflare"
-    : "sodix-generator";
-
-  const requestBody = provider === "cloudflare"
-    ? {prompt}
-    : {prompt,provider};
-
-  button.disabled = true;
-  button.textContent = "Generating Website...";
-  status.textContent = "SODIX AI is building your website with " +
-    providerNames[provider] + "...";
-
-  try {
-    const response = await fetch(
-      SUPABASE_URL + "/functions/v1/" + functionName,
-      {
-        method:"POST",
-        headers:apiHeaders(),
-        body:JSON.stringify(requestBody)
-      }
-    );
-
-    const data = await readResponse(response);
-
-    if (!data.html) throw new Error("No website HTML was returned.");
-
-    generatedHTML = data.html;
-
-    document.getElementById("previewFrame").srcdoc = generatedHTML;
-    document.getElementById("downloadBtn").disabled = false;
-
-    status.textContent = "🎉 Website generated successfully with " +
-      providerNames[provider] + "!";
-
-    document.getElementById("previewStatus").textContent =
-      "Your website is ready to preview.";
-
-    document.getElementById("editStatus").textContent =
-      "You can now use AI Edit to modify this website.";
-
-    document.getElementById("editInstruction").value = "";
-
-    document.getElementById("publishStatus").textContent =
-      "Your website is ready. You can now publish it.";
-
-    document.getElementById("previewFrame").scrollIntoView({
-      behavior:"smooth",
-      block:"center"
-    });
-
-  } catch(error) {
-    status.textContent = "Error: " + error.message;
-  } finally {
-    button.disabled = false;
-    button.textContent = "✨ Generate My Website";
-  }
+if(!html){
+document.getElementById("appPreviewStatus").textContent="No index.html file was generated, so a browser preview cannot be created yet.";
+return
 }
 
-// AI WEBSITE EDITOR
+const inject=(tag,content)=>{
+if(!content)return"";
+return tag==="css"?"<style>\\n"+content+"\\n</style>":"<script>\\n"+content.replace(/<\\/script/gi,"<\\\\/script")+"\\n<\\/script>"
+};
 
-async function editWebsite() {
-  const instruction = document.getElementById("editInstruction").value.trim();
-  const button = document.getElementById("editBtn");
-  const status = document.getElementById("editStatus");
+const css=getFile("style.css");
+const js=getFile("app.js");
 
-  if (!generatedHTML) {
-    status.textContent = "Generate a website before editing it.";
-    return;
-  }
-
-  if (!instruction) {
-    status.textContent = "Please describe what you want to change.";
-    return;
-  }
-
-  button.disabled = true;
-  button.textContent = "Editing Website...";
-  status.textContent = "SODIX AI is improving your website...";
-
-  try {
-    const response = await fetch(
-      SUPABASE_URL + "/functions/v1/sodix-editor",
-      {
-        method:"POST",
-        headers:apiHeaders(),
-        body:JSON.stringify({html:generatedHTML,instruction})
-      }
-    );
-
-    const data = await readResponse(response);
-
-    if (!data.html) throw new Error("The editor did not return updated HTML.");
-
-    generatedHTML = data.html;
-
-    document.getElementById("previewFrame").srcdoc = generatedHTML;
-    document.getElementById("downloadBtn").disabled = false;
-
-    status.textContent = "🎉 Website edited successfully!";
-    document.getElementById("previewStatus").textContent = "Your updated website is ready.";
-    document.getElementById("editInstruction").value = "";
-
-    document.getElementById("publishStatus").textContent =
-      "Your website has changed. Publish or republish to update the live version.";
-
-  } catch(error) {
-    status.textContent = "Error: " + error.message;
-  } finally {
-    button.disabled = false;
-    button.textContent = "🪄 Edit My Website";
-  }
+if(css){
+if(html.includes("</head>"))html=html.replace("</head>",inject("css",css)+"</head>");
+else html=inject("css",css)+html
 }
 
-// PUBLISH A NEW WEBSITE
-
-async function publishWebsite() {
-  const button = document.getElementById("publishBtn");
-  const status = document.getElementById("publishStatus");
-
-  if (!generatedHTML) {
-    status.textContent = "Generate a website before publishing.";
-    return;
-  }
-
-  button.disabled = true;
-  button.textContent = "Publishing Website...";
-  status.textContent = "Uploading your website to Cloudflare Pages. Please wait...";
-
-  try {
-    const response = await fetch(
-      SUPABASE_URL + "/functions/v1/sodix-hosting-v2",
-      {
-        method:"POST",
-        headers:apiHeaders(),
-        body:JSON.stringify({html:generatedHTML})
-      }
-    );
-
-    const data = await readResponse(response);
-
-    const url = data.url || data.liveUrl;
-    const projectName = data.projectName;
-
-    if (!url || !projectName) {
-      throw new Error("Publishing response is missing the website link or project name.");
-    }
-
-    publishedProject = {
-      projectName:projectName,
-      url:url,
-      savedAt:new Date().toISOString()
-    };
-
-    localStorage.setItem(STORAGE_KEY,JSON.stringify(publishedProject));
-
-    showLiveWebsite(url);
-    document.getElementById("republishBtn").disabled = false;
-
-    status.textContent = "Website published successfully!";
-
-  } catch(error) {
-    status.textContent = "Publishing error: " + error.message;
-  } finally {
-    button.disabled = false;
-    button.textContent = "🌍 Publish Website";
-  }
+if(js){
+if(html.includes("</body>"))html=html.replace("</body>",inject("js",js)+"</body>");
+else html+=inject("js",js)
 }
 
-// REPUBLISH EXISTING WEBSITE
-
-async function republishWebsite() {
-  const button = document.getElementById("republishBtn");
-  const status = document.getElementById("publishStatus");
-
-  if (!generatedHTML) {
-    status.textContent = "Generate a website first.";
-    return;
-  }
-
-  if (!publishedProject || !publishedProject.projectName) {
-    status.textContent = "Publish your website first.";
-    return;
-  }
-
-  button.disabled = true;
-  button.textContent = "Updating Website...";
-  status.textContent = "Updating your existing live website...";
-
-  try {
-    const response = await fetch(
-      SUPABASE_URL + "/functions/v1/sodix-republish",
-      {
-        method:"POST",
-        headers:apiHeaders(),
-        body:JSON.stringify({
-          html:generatedHTML,
-          projectName:publishedProject.projectName
-        })
-      }
-    );
-
-    const data = await readResponse(response);
-
-    const url = data.url || data.liveUrl || publishedProject.url;
-
-    publishedProject.url = url;
-    publishedProject.savedAt = new Date().toISOString();
-
-    localStorage.setItem(STORAGE_KEY,JSON.stringify(publishedProject));
-
-    showLiveWebsite(url);
-
-    status.textContent = "🎉 Your live website has been updated!";
-
-  } catch(error) {
-    status.textContent = "Update error: " + error.message;
-  } finally {
-    button.disabled = false;
-    button.textContent = "🔄 Republish / Update Website";
-  }
+document.getElementById("appPreviewFrame").srcdoc=html;
+document.getElementById("appPreviewStatus").textContent="Preview refreshed. Only index.html, style.css and app.js are automatically combined; additional assets and backend files may need setup."
 }
 
-// SHOW LIVE LINK
-
-function showLiveWebsite(url) {
-  const card = document.getElementById("liveCard");
-  const link = document.getElementById("liveLink");
-
-  link.textContent = url;
-  card.style.display = "block";
+function setAppPreview(mode){
+document.getElementById("appPreviewFrame").classList.toggle("mobile",mode==="mobile")
 }
 
-// COPY LIVE LINK
-
-async function copyLiveLink() {
-  if (!publishedProject || !publishedProject.url) return;
-
-  try {
-    await navigator.clipboard.writeText(publishedProject.url);
-    document.getElementById("publishStatus").textContent =
-      "✅ Website link copied successfully!";
-  } catch(error) {
-    document.getElementById("publishStatus").textContent =
-      "Copy was blocked by your browser. Select and copy the link manually.";
-  }
+function saveAppProject(){
+if(!appProject)return;
+saveCurrentFile();
+try{
+localStorage.setItem(APP_STORAGE_KEY,JSON.stringify(appProject));
+document.getElementById("appStatus").textContent="Project saved in this browser. Browser storage is device-specific."
+}catch(e){
+document.getElementById("appStatus").textContent="Could not save: project may be too large for browser storage."
+}
 }
 
-// OPEN LIVE WEBSITE
-
-function openLiveLink() {
-  if (publishedProject && publishedProject.url) {
-    window.open(publishedProject.url,"_blank","noopener");
-  }
+function loadSavedAppProject(){
+try{
+const raw=localStorage.getItem(APP_STORAGE_KEY);
+if(!raw){
+document.getElementById("appStatus").textContent="No saved project was found in this browser.";
+return
 }
 
-// DOWNLOAD WEBSITE
+appProject=JSON.parse(raw);
+activeFilePath=appProject.files?.[0]?.path||"";
+document.getElementById("projectPanel").style.display="block";
+document.getElementById("projectDescription").textContent=appProject.description||"";
+document.getElementById("fileCountPill").textContent=appProject.files.length+" files";
+renderFileList();
 
-function downloadWebsite() {
-  if (!generatedHTML) {
-    alert("Generate a website first.");
-    return;
-  }
+if(activeFilePath)openProjectFile(activeFilePath);
 
-  const blob = new Blob([generatedHTML],{type:"text/html"});
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-
-  link.href = url;
-  link.download = "sodix-ai-website.html";
-
-  document.body.appendChild(link);
-  link.click();
-  link.remove();
-
-  setTimeout(() => URL.revokeObjectURL(url),1000);
+previewAppProject();
+document.getElementById("appStatus").textContent="Saved project restored."
+}catch(e){
+document.getElementById("appStatus").textContent="Could not restore saved project: "+e.message
+}
 }
 
-// DESKTOP AND MOBILE PREVIEW
+async function downloadProjectZip(){
+if(!appProject)return;
 
-function setPreview(mode) {
-  const frame = document.getElementById("previewFrame");
-
-  if (mode === "mobile") {
-    frame.classList.add("mobile");
-  } else {
-    frame.classList.remove("mobile");
-  }
+if(typeof JSZip==="undefined"){
+document.getElementById("appStatus").textContent="ZIP library did not load. Check your internet connection and retry.";
+return
 }
 
-// RESTORE SAVED PUBLISHED PROJECT
+saveCurrentFile();
 
-function restorePublishedProject() {
-  if (publishedProject && publishedProject.url && publishedProject.projectName) {
-    showLiveWebsite(publishedProject.url);
-    document.getElementById("republishBtn").disabled = false;
-    document.getElementById("publishStatus").textContent =
-      "Your previously published project was found in this browser. Generate its updated HTML to republish it.";
-  }
+const zip=new JSZip();
+appProject.files.forEach(f=>{
+if(safeFilePath(f.path))zip.file(f.path,f.content)
+});
+
+zip.file("SODIX-PROJECT-INFO.json",JSON.stringify({
+projectName:appProject.projectName,
+description:appProject.description,
+dependencies:appProject.dependencies,
+environmentVariables:appProject.environmentVariables,
+setupInstructions:appProject.setupInstructions,
+warnings:appProject.warnings
+},null,2));
+
+try{
+document.getElementById("appStatus").textContent="Preparing ZIP download...";
+const blob=await zip.generateAsync({type:"blob"});
+downloadBlob(blob,((appProject.projectName||"sodix-project").replace(/[^a-z0-9-_]/gi,"-"))+".zip","application/zip");
+document.getElementById("appStatus").textContent="Project ZIP downloaded."
+}catch(e){
+document.getElementById("appStatus").textContent="ZIP error: "+e.message
+}
+}
+
+function downloadCurrentFile(){
+if(!appProject||!activeFilePath)return;
+saveCurrentFile();
+const f=appProject.files.find(x=>x.path===activeFilePath);
+downloadBlob(f.content,f.path.split("/").pop(),"text/plain")
 }
 
 restorePublishedProject();
 </script>
-
 </body>
 </html>
