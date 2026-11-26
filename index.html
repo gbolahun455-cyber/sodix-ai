@@ -84,9 +84,9 @@ const pr=await fetch(SUPABASE_URL+"/functions/v1/sodix-planner-v2",{method:"POST
 const pd=await readResponse(pr);let blueprint=pd.blueprint||pd.plan||pd.data?.blueprint;
 if(!blueprint)throw new Error("Planner response did not contain a blueprint. Response keys: "+Object.keys(pd).join(", "));
 const override=document.getElementById("projectNameInput").value.trim();if(override)blueprint.projectName=override;
-document.getElementById("blueprintSummary").innerHTML='<span class="pill">Blueprint ready</span> <span class="pill">'+escapeHTML(blueprint.projectName||"Untitled project")+'</span> <span class="pill">'+(Array.isArray(blueprint.features)?blueprint.features.length:0)+' planned features</span>';const gr=await fetch(SUPABASE_URL+"/functions/v1/sodix-project-generator",{method:"POST",headers:apiHeaders(),body:JSON.stringify({blueprint})});
-const gd=await readResponse(gr);
-const project=gd.project||gd.data?.project;
+document.getElementById("blueprintSummary").innerHTML='<span class="pill">Blueprint ready</span> <span class="pill">'+escapeHTML(blueprint.projectName||"Untitled project")+'</span> <span class="pill">'+(Array.isArray(blueprint.features)?blueprint.features.length:0)+' planned features</span>';
+status.textContent="Step 2 of 2: Generating project files with Cloudflare Workers AI...";
+  const gr=await fetch(SUPABASE_URL+"/functions/v1/sodix-project-generator",{method:"POST",headers:apiHeaders(),body:JSON.stringify({blueprint})});const gd=await readResponse(gr);const project=gd.project||gd.data?.project;
 
 if(!project||!Array.isArray(project.files))throw new Error("Project generator response did not contain a files array.");
 
@@ -94,17 +94,7 @@ const files=project.files.filter(f=>safeFilePath(f.path)&&typeof f.content==="st
 
 if(!files.length)throw new Error("The generator returned no valid files.");
 
-appProject={
-projectName:project.projectName||blueprint.projectName||"SODIX Project",
-description:project.description||blueprint.description||"",
-files,
-dependencies:project.dependencies||[],
-environmentVariables:project.environmentVariables||[],
-setupInstructions:project.setupInstructions||[],
-warnings:project.warnings||[],
-blueprint,
-generatedAt:new Date().toISOString()
-};
+appProject={projectName:project.projectName||blueprint.projectName||"SODIX Project",description:project.description||blueprint.description||"",files,dependencies:project.dependencies||[],environmentVariables:project.environmentVariables||[],setupInstructions:project.setupInstructions||[],warnings:project.warnings||[],blueprint,generatedAt:new Date().toISOString()};
 
 activeFilePath=files[0].path;
 renderFileList();
@@ -163,7 +153,6 @@ function previewAppProject(){
 if(!appProject)return;
 saveCurrentFile();
 let html=getFile("index.html");
-
 if(!html){
 document.getElementById("appPreviewStatus").textContent="No index.html file was generated, so a browser preview cannot be created yet.";
 return
@@ -174,8 +163,7 @@ if(!content)return"";
 return tag==="css"?"<style>\\n"+content+"\\n</style>":"<script>\\n"+content.replace(/<\\/script/gi,"<\\\\/script")+"\\n<\\/script>"
 };
 
-const css=getFile("style.css");
-const js=getFile("app.js");
+const css=getFile("style.css"),js=getFile("app.js");
 
 if(css){
 if(html.includes("</head>"))html=html.replace("</head>",inject("css",css)+"</head>");
@@ -213,16 +201,13 @@ if(!raw){
 document.getElementById("appStatus").textContent="No saved project was found in this browser.";
 return
 }
-
 appProject=JSON.parse(raw);
 activeFilePath=appProject.files?.[0]?.path||"";
 document.getElementById("projectPanel").style.display="block";
 document.getElementById("projectDescription").textContent=appProject.description||"";
 document.getElementById("fileCountPill").textContent=appProject.files.length+" files";
 renderFileList();
-
 if(activeFilePath)openProjectFile(activeFilePath);
-
 previewAppProject();
 document.getElementById("appStatus").textContent="Saved project restored."
 }catch(e){
@@ -232,19 +217,15 @@ document.getElementById("appStatus").textContent="Could not restore saved projec
 
 async function downloadProjectZip(){
 if(!appProject)return;
-
 if(typeof JSZip==="undefined"){
 document.getElementById("appStatus").textContent="ZIP library did not load. Check your internet connection and retry.";
 return
 }
-
 saveCurrentFile();
-
 const zip=new JSZip();
 appProject.files.forEach(f=>{
 if(safeFilePath(f.path))zip.file(f.path,f.content)
 });
-
 zip.file("SODIX-PROJECT-INFO.json",JSON.stringify({
 projectName:appProject.projectName,
 description:appProject.description,
@@ -253,7 +234,6 @@ environmentVariables:appProject.environmentVariables,
 setupInstructions:appProject.setupInstructions,
 warnings:appProject.warnings
 },null,2));
-
 try{
 document.getElementById("appStatus").textContent="Preparing ZIP download...";
 const blob=await zip.generateAsync({type:"blob"});
@@ -275,4 +255,3 @@ restorePublishedProject();
 </script>
 </body>
 </html>
-status.textContent="Step 2 of 2: Generating project files with Cloudflare Workers AI...";
